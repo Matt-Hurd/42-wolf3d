@@ -6,7 +6,7 @@
 #    By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/28 19:34:56 by mhurd             #+#    #+#              #
-#    Updated: 2016/10/15 09:52:48 by mhurd            ###   ########.fr        #
+#    Updated: 2016/10/15 23:02:30 by mhurd            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,11 @@ INCDIR	= ./includes/
 OBJDIR	= ./obj/
 
 all: obj libft mlx libgfx $(NAME)
+
+gfx:
+	make -C ./libgfx fclean
+	rm -rf $(NAME)
+	make
 
 obj:
 	mkdir -p $(OBJDIR)

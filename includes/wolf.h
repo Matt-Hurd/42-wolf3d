@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 16:06:16 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/15 13:48:58 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/10/15 16:53:30 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <errno.h>
-
 
 /*
 ** KEYS
@@ -52,4 +51,5 @@ void		ft_error_unknown(void);
 void		ft_error(char *s);
 void		setup_dda(t_wolf *w);
 void		do_dda(t_wolf *w);
+void		load_textures(t_data *d);
 #endif

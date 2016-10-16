@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 19:26:41 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/15 13:49:12 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/10/15 20:16:25 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,16 @@ t_plot	*parse_file(char *filename)
 	list_to_array(plot, list);
 	close(fd);
 	return (plot);
+}
+
+
+
+#include <stdio.h>
+
+
+
+
+void	load_textures(t_data *d)
+{
+	d->w->textures = read_bmp("textures/sheet.bmp", &d->w->tex_info);
 }

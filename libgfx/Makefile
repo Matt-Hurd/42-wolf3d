@@ -12,7 +12,8 @@ EXT +=	Makefile
 SRC	+=	ft_drawline.c \
 		matrix_math.c \
 		transform_matrix.c \
-		initializers.c
+		initializers.c \
+		bmp_reader.c
 
 O =		$(addprefix $(ODIR), $(OBJ))
 

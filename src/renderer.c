@@ -6,12 +6,11 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 04:47:42 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/15 13:47:08 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/10/15 23:51:49 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-
 void	draw_map(t_data *d, t_wolf *w)
 {
 	int x;
@@ -53,17 +52,24 @@ int		expose_hook(t_data *d)
 	return (0);
 }
 
+int		ft_red(t_data *d)
+{
+	mlx_destroy_window(d->mlx, d->win);
+	exit(0);
+}
+
 void	draw_everything(t_data *d, t_wolf *w)
 {
 	w->posX = 22;
 	w->posY = 12;
-	w->dirX = -1;
-	w->dirY = 0;
+	w->dir = M_PI;
 	w->planeX = 0;
-	w->planeY = 0.66;
+	w->planeY = 0.33;
+	load_textures(d);
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, WINDOW_SIZE_X, WINDOW_SIZE_Y, "Wolf3D");
 	mlx_expose_hook(d->win, expose_hook, d);
 	mlx_hook(d->win, 2, 3, key_hook, d);
+	mlx_hook(d->win, 17, 0, ft_red, d);
     mlx_loop(d->mlx);
 }

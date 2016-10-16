@@ -6,11 +6,19 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 09:42:57 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/15 14:02:32 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/10/15 22:59:22 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+
+
+
+
+#include <stdio.h>
+
+
+
 
 void	init_vars(t_wolf *w, int x)
 {
@@ -21,8 +29,12 @@ void	init_vars(t_wolf *w, int x)
 	w->rayPosY = w->posY;
 	w->mapY = w->posY;
 	w->mapX = w->posX;
-	w->rayDirX = w->dirX + w->planeX * cam;
-	w->rayDirY = w->dirY + w->planeY * cam;
+	w->rayDir = w->dir - w->planeY * cam;
+	w->rayDirX = cos(w->rayDir);
+	w->rayDirY = sin(w->rayDir);
+	w->dirX = cos(w->dir);
+	w->dirY = sin(w->dir);
+	// printf("%f, %f\n", w->rayDirX, w->rayDirY);
 	w->deltaDistX = sqrt(1 + (w->rayDirY * w->rayDirY)
 		/ (w->rayDirX * w->rayDirX));
 	w->deltaDistY = sqrt(1 + (w->rayDirX * w->rayDirX)

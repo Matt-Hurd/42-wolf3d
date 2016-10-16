@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 16:42:11 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/15 13:57:14 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/10/15 20:16:21 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <math.h>
 # include <time.h>
+#include <stdio.h>
+#include <string.h>
 # define ABS(x) ((x > 0) ? x : x * -1)
 # define COLOR2 0x16A085
 # define COLOR1 0xF4D03F
@@ -50,35 +52,45 @@ typedef struct	s_plot
 	int		height;
 }				t_plot;
 
+typedef struct s_bmp_info
+{
+    unsigned long	width; 
+    unsigned long	height;
+}				t_bmp_info;
+
 typedef struct	s_wolf
 {
-	float	posX;
-	float	posY;
-	float	planeX;
-	float	planeY;
-	clock_t	time;
-	clock_t	oldTime;
-	double	rayPosX;
-	double	rayPosY;
-	double	rayDirX;
-	double	rayDirY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
-	double	moveSpeed;
-	double	rotSpeed;
-	int		stepX;
-	int		stepY;
-	int		hit;
-	int		side;
-	int		mapY;
-	int		mapX;
-	int		lineHeight;
-	float	dirX;
-	float	dirY;
-	t_plot	*plot;
+	float			posX;
+	float			posY;
+	float			planeX;
+	float			planeY;
+	clock_t			time;
+	clock_t			oldTime;
+	double			rayPosX;
+	double			rayPosY;
+	double			rayDir;
+	double			rayDirX;
+	double			rayDirY;
+	double			dirX;
+	double			dirY;
+	double			sideDistX;
+	double			sideDistY;
+	double			deltaDistX;
+	double			deltaDistY;
+	double			perpWallDist;
+	double			moveSpeed;
+	double			rotSpeed;
+	int				stepX;
+	int				stepY;
+	int				hit;
+	int				side;
+	int				mapY;
+	int				mapX;
+	int				lineHeight;
+	float			dir;
+	t_plot			*plot;
+	unsigned char	*textures;
+	t_bmp_info		tex_info;
 }				t_wolf;
 
 typedef struct	s_data
@@ -108,4 +120,5 @@ void			ft_make_identity_matrix(float matrix[4][4]);
 void			ft_3d_draw_vert(t_data *d, int x, int y, int height);
 t_3d			*ft_make_3d(int x, int y, int z);
 t_vertex		*ft_make_vertex(int x, int y, int z);
+unsigned char	*read_bmp(char *filename, t_bmp_info *info);
 #endif

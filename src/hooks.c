@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 01:12:45 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/15 13:49:36 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/10/15 23:45:33 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,25 @@ static	void	key_hook_movement(int keycode, t_wolf *w)
 {
 	if (keycode == KEY_UP)
 	{
-      if(!w->plot->points[(int)(w->posX + w->dirX)][(int)w->posY])
-      	w->posX += w->dirX * w->moveSpeed;
+      if(!w->plot->points[(int)(w->posX + cos(w->dir))][(int)w->posY])
+      	w->posX += cos(w->dir) * w->moveSpeed;
       if(!w->plot->points[(int)w->posX][(int)(w->posY + w->dirY)])
       	w->posY += w->dirY * w->moveSpeed;
 	}
 	else if (keycode == KEY_DOWN)
 	{		
-      if(!w->plot->points[(int)(w->posX - w->dirX)][(int)w->posY])
-      	w->posX -= w->dirX * w->moveSpeed;
+      if(!w->plot->points[(int)(w->posX - cos(w->dir))][(int)w->posY])
+      	w->posX -= cos(w->dir) * w->moveSpeed;
       if(!w->plot->points[(int)w->posX][(int)(w->posY - w->dirY)])
       	w->posY -= w->dirY * w->moveSpeed;
 	}
 	else if (keycode == KEY_LEFT)
 	{
-		double oldDirX = w->dirX;
-		w->dirX = w->dirX * cos(w->rotSpeed) - w->dirY * sin(w->rotSpeed);
-		w->dirY = oldDirX * sin(w->rotSpeed) + w->dirY * cos(w->rotSpeed);
-		double oldPlaneX = w->planeX;
-		w->planeX = w->planeX * cos(w->rotSpeed) - w->planeY * sin(w->rotSpeed);
-		w->planeY = oldPlaneX * sin(w->rotSpeed) + w->planeY * cos(w->rotSpeed);
+		w->dir += w->rotSpeed;
 	}
 	else if (keycode == KEY_RIGHT)
 	{
-		double oldDirX = w->dirX;
-		w->dirX = w->dirX * cos(-w->rotSpeed) - w->dirY * sin(-w->rotSpeed);
-		w->dirY = oldDirX * sin(-w->rotSpeed) + w->dirY * cos(-w->rotSpeed);
-		double oldPlaneX = w->planeX;
-		w->planeX = w->planeX * cos(-w->rotSpeed) - w->planeY * sin(-w->rotSpeed);
-		w->planeY = oldPlaneX * sin(-w->rotSpeed) + w->planeY * cos(-w->rotSpeed);
+		w->dir -= w->rotSpeed;
 	}
 }
 

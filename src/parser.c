@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 19:26:41 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/15 20:16:25 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/10/18 12:19:29 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	list_to_array(t_plot *plot, t_list *rows)
 	}
 }
 
-t_plot	*parse_file(char *filename)
+t_plot		*parse_file(char *filename)
 {
 	char	*buff;
 	int		result;
@@ -54,7 +54,7 @@ t_plot	*parse_file(char *filename)
 			plot->width = ft_count_words(buff, 0, ' ');
 		if (plot->width != ft_count_words(buff, 0, ' '))
 			ft_error("Invalid Map");
-		ft_lst_add_back(&list, ft_lstnew(buff, sizeof(char) * (ft_strlen(buff) + 1)));
+		ft_lst_add_back(&list, ft_lstnew(buff, ft_strlen(buff) + 1));
 		(plot->height)++;
 	}
 	if (result < 0)
@@ -64,14 +64,7 @@ t_plot	*parse_file(char *filename)
 	return (plot);
 }
 
-
-
-#include <stdio.h>
-
-
-
-
-void	load_textures(t_data *d)
+void		load_textures(t_data *d)
 {
 	d->w->textures = read_bmp("textures/sheet.bmp", &d->w->tex_info);
 }

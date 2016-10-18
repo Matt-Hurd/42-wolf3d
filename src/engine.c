@@ -6,19 +6,11 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 09:42:57 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/15 22:59:22 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/10/18 12:20:18 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-
-
-
-
-#include <stdio.h>
-
-
-
 
 void	init_vars(t_wolf *w, int x)
 {
@@ -34,7 +26,6 @@ void	init_vars(t_wolf *w, int x)
 	w->rayDirY = sin(w->rayDir);
 	w->dirX = cos(w->dir);
 	w->dirY = sin(w->dir);
-	// printf("%f, %f\n", w->rayDirX, w->rayDirY);
 	w->deltaDistX = sqrt(1 + (w->rayDirY * w->rayDirY)
 		/ (w->rayDirX * w->rayDirX));
 	w->deltaDistY = sqrt(1 + (w->rayDirX * w->rayDirX)
@@ -53,7 +44,7 @@ void	setup_dda(t_wolf *w)
 	if (w->rayDirY < 0)
 		w->sideDistY = (w->rayPosY - w->mapY) * w->deltaDistY;
 	else
-		w->sideDistY = (w->mapY + 1.0 - w->rayPosY) * w->deltaDistY;	
+		w->sideDistY = (w->mapY + 1.0 - w->rayPosY) * w->deltaDistY;
 }
 
 void	do_dda(t_wolf *w)
@@ -61,8 +52,8 @@ void	do_dda(t_wolf *w)
 	while (w->hit == 0)
 	{
 		w->side = (w->sideDistX < w->sideDistY) ? 0 : 1;
-        if (w->sideDistX < w->sideDistY)
-        {
+		if (w->sideDistX < w->sideDistY)
+		{
 			w->sideDistX += w->deltaDistX;
 			w->mapX += w->stepX;
 		}

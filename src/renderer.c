@@ -6,14 +6,17 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 04:47:42 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/15 23:51:49 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/10/18 12:17:12 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+
 void	draw_map(t_data *d, t_wolf *w)
 {
 	int x;
+	int lineheight;
+	int drawstart;
 
 	x = -1;
 	while (++x < WINDOW_SIZE_X)
@@ -22,16 +25,16 @@ void	draw_map(t_data *d, t_wolf *w)
 		setup_dda(w);
 		do_dda(w);
 		if (w->side == 0)
-			w->perpWallDist = (w->mapX - w->rayPosX + (1 - w->stepX) / 2) / w->rayDirX;
+			w->perpWallDist = (w->mapX - w->rayPosX +
+				(1 - w->stepX) / 2) / w->rayDirX;
 		else
-			w->perpWallDist = (w->mapY - w->rayPosY + (1 - w->stepY) / 2) / w->rayDirY;
-
-		int lineHeight = (int)(WINDOW_SIZE_Y / w->perpWallDist);
-		int drawStart = -lineHeight / 2 + WINDOW_SIZE_Y / 2;
-		ft_3d_draw_vert(d, x, drawStart, lineHeight);
+			w->perpWallDist = (w->mapY - w->rayPosY +
+				(1 - w->stepY) / 2) / w->rayDirY;
+		lineheight = (int)(WINDOW_SIZE_Y / w->perpWallDist);
+		drawstart = -lineheight / 2 + WINDOW_SIZE_Y / 2;
+		ft_3d_draw_vert(d, x, drawstart, lineheight);
 		w->oldTime = w->time;
 		w->time = clock();
-		// double frameTime = (double)(w->time - w->oldTime) / 100;
 		w->moveSpeed = .25;
 		w->rotSpeed = .15;
 	}
@@ -71,5 +74,5 @@ void	draw_everything(t_data *d, t_wolf *w)
 	mlx_expose_hook(d->win, expose_hook, d);
 	mlx_hook(d->win, 2, 3, key_hook, d);
 	mlx_hook(d->win, 17, 0, ft_red, d);
-    mlx_loop(d->mlx);
+	mlx_loop(d->mlx);
 }

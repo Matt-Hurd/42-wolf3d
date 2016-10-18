@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 16:06:16 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/15 16:53:30 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/10/18 12:20:36 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@
 # define KEY_ROT_Y_D 84
 # define KEY_ROT_Z_U 88
 # define KEY_ROT_Z_D 85
-
 
 t_plot		*parse_file(char *filename);
 void		draw_everything(t_data *d, t_wolf *f);

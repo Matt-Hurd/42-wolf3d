@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 16:48:59 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/15 23:24:45 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/10/18 10:26:58 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ static int		find_sheet(t_data *d, int z)
 	if (z == 1)
 		ret = (0);
 	else if (z == 2)
-		ret = ((64 * 3) * 2 - (64 * 64 * 3 * 6) * 2);
+		ret = -220416;
 	else if (z == 3)
-		ret = ((64 * 3) * 2 - (64 * 64 * 3 * 6) * 5);
+		ret = -368256;
 	else if (z == 4)
-		ret = ((64 * 3) * 2 - (64 * 64 * 3 * 6) * 12);
+		ret = -884352;
 	else if (z == 5)
-		ret = -((64 * 64 * 3 * 6) * 16);
+		ret = -1179648;
 	else
 		ret = 0;
 	if (d->w->side)
@@ -87,8 +87,8 @@ static void			draw_point(t_data *d, t_3d p, float height, int start)
 	if (p.x > 0 && p.y > 0 && p.x < WINDOW_SIZE_X && p.y < WINDOW_SIZE_Y)
 	{
 		d->pixel_img[i] = (color[0]) * darken;
-		d->pixel_img[++i] = (float)(color[1]) * darken;
-		d->pixel_img[++i] = (float)(color[2]) * darken;
+		d->pixel_img[++i] = (color[1]) * darken;
+		d->pixel_img[++i] = (color[2]) * darken;
 	}
 }
 

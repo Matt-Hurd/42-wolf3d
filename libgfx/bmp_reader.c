@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 16:20:01 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/15 20:26:22 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/10/29 10:30:42 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 
 unsigned char	*read_bmp(char *filename, t_bmp_info *f_info)
 {
-    unsigned char* data;
-    FILE* f;
-    unsigned char info[54];
-    unsigned int size;
+	unsigned char	*data;
+	FILE			*f;
+	unsigned char	info[54];
+	unsigned int	size;
 
-    f = fopen(filename, "rb");
-    fread(info, sizeof(unsigned char), 54, f);
-    f_info->width = *(int*)&info[18];
-    f_info->height = *(int*)&info[22];
-
-    size = 3 * f_info->width * f_info->height;
-    data = (unsigned char *)ft_memalloc(size);
-    fread(data, 1, size, f); 
-    fclose(f);
-
-    return data;
+	f = fopen(filename, "rb");
+	fread(info, sizeof(unsigned char), 54, f);
+	f_info->width = *(int*)&info[18];
+	f_info->height = *(int*)&info[22];
+	size = 3 * f_info->width * f_info->height;
+	data = (unsigned char *)ft_memalloc(size);
+	fread(data, 1, size, f);
+	fclose(f);
+	return (data);
 }

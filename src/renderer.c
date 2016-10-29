@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 04:47:42 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/18 12:17:12 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/10/29 10:39:44 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ void	draw_map(t_data *d, t_wolf *w)
 		setup_dda(w);
 		do_dda(w);
 		if (w->side == 0)
-			w->perpWallDist = (w->mapX - w->rayPosX +
-				(1 - w->stepX) / 2) / w->rayDirX;
+			w->perpwalldist = (w->mapx - w->rayposx +
+				(1 - w->stepx) / 2) / w->raydirx;
 		else
-			w->perpWallDist = (w->mapY - w->rayPosY +
-				(1 - w->stepY) / 2) / w->rayDirY;
-		lineheight = (int)(WINDOW_SIZE_Y / w->perpWallDist);
+			w->perpwalldist = (w->mapy - w->rayposy +
+				(1 - w->stepy) / 2) / w->raydiry;
+		lineheight = (int)(WINDOW_SIZE_Y / w->perpwalldist);
 		drawstart = -lineheight / 2 + WINDOW_SIZE_Y / 2;
 		ft_3d_draw_vert(d, x, drawstart, lineheight);
-		w->oldTime = w->time;
+		w->oldtime = w->time;
 		w->time = clock();
-		w->moveSpeed = .25;
-		w->rotSpeed = .15;
+		w->movespeed = .25;
+		w->rotspeed = .15;
 	}
 }
 
@@ -63,11 +63,9 @@ int		ft_red(t_data *d)
 
 void	draw_everything(t_data *d, t_wolf *w)
 {
-	w->posX = 22;
-	w->posY = 12;
+	w->posx = 22;
+	w->posy = 12;
 	w->dir = M_PI;
-	w->planeX = 0;
-	w->planeY = 0.33;
 	load_textures(d);
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, WINDOW_SIZE_X, WINDOW_SIZE_Y, "Wolf3D");

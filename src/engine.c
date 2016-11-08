@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 09:42:57 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/18 12:20:18 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/11/08 14:34:52 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,52 +17,52 @@ void	init_vars(t_wolf *w, int x)
 	double cam;
 
 	cam = 2 * x / (double)WINDOW_SIZE_X - 1;
-	w->rayPosX = w->posX;
-	w->rayPosY = w->posY;
-	w->mapY = w->posY;
-	w->mapX = w->posX;
-	w->rayDir = w->dir - w->planeY * cam;
-	w->rayDirX = cos(w->rayDir);
-	w->rayDirY = sin(w->rayDir);
-	w->dirX = cos(w->dir);
-	w->dirY = sin(w->dir);
-	w->deltaDistX = sqrt(1 + (w->rayDirY * w->rayDirY)
-		/ (w->rayDirX * w->rayDirX));
-	w->deltaDistY = sqrt(1 + (w->rayDirX * w->rayDirX)
-		/ (w->rayDirY * w->rayDirY));
+	w->rayposx = w->posx;
+	w->rayposy = w->posy;
+	w->mapy = w->posy;
+	w->mapx = w->posx;
+	w->raydir = w->dir - 0.33 * cam;
+	w->raydirx = cos(w->raydir);
+	w->raydiry = sin(w->raydir);
+	w->dirx = cos(w->dir);
+	w->diry = sin(w->dir);
+	w->deltadistx = sqrt(1 + (w->raydiry * w->raydiry)
+		/ (w->raydirx * w->raydirx));
+	w->deltadisty = sqrt(1 + (w->raydirx * w->raydirx)
+		/ (w->raydiry * w->raydiry));
 	w->hit = 0;
 }
 
 void	setup_dda(t_wolf *w)
 {
-	w->stepX = (w->rayDirX < 0) ? -1 : 1;
-	w->stepY = (w->rayDirY < 0) ? -1 : 1;
-	if (w->rayDirX < 0)
-		w->sideDistX = (w->rayPosX - w->mapX) * w->deltaDistX;
+	w->stepx = (w->raydirx < 0) ? -1 : 1;
+	w->stepy = (w->raydiry < 0) ? -1 : 1;
+	if (w->raydirx < 0)
+		w->sidedistx = (w->rayposx - w->mapx) * w->deltadistx;
 	else
-		w->sideDistX = (w->mapX + 1.0 - w->rayPosX) * w->deltaDistX;
-	if (w->rayDirY < 0)
-		w->sideDistY = (w->rayPosY - w->mapY) * w->deltaDistY;
+		w->sidedistx = (w->mapx + 1.0 - w->rayposx) * w->deltadistx;
+	if (w->raydiry < 0)
+		w->sidedisty = (w->rayposy - w->mapy) * w->deltadisty;
 	else
-		w->sideDistY = (w->mapY + 1.0 - w->rayPosY) * w->deltaDistY;
+		w->sidedisty = (w->mapy + 1.0 - w->rayposy) * w->deltadisty;
 }
 
 void	do_dda(t_wolf *w)
 {
 	while (w->hit == 0)
 	{
-		w->side = (w->sideDistX < w->sideDistY) ? 0 : 1;
-		if (w->sideDistX < w->sideDistY)
+		w->side = (w->sidedistx < w->sidedisty) ? 0 : 1;
+		if (w->sidedistx < w->sidedisty)
 		{
-			w->sideDistX += w->deltaDistX;
-			w->mapX += w->stepX;
+			w->sidedistx += w->deltadistx;
+			w->mapx += w->stepx;
 		}
 		else
 		{
-			w->sideDistY += w->deltaDistY;
-			w->mapY += w->stepY;
+			w->sidedisty += w->deltadisty;
+			w->mapy += w->stepy;
 		}
-		if (w->plot->points[w->mapX][w->mapY] > 0)
+		if (w->plot->points[w->mapx][w->mapy] > 0)
 			w->hit = 1;
 	}
 }

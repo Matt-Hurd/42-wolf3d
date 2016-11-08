@@ -6,7 +6,7 @@
 #    By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/28 19:34:56 by mhurd             #+#    #+#              #
-#    Updated: 2016/10/18 09:54:25 by mhurd            ###   ########.fr        #
+#    Updated: 2016/11/08 14:29:31 by mhurd            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC		= main.c \
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -O2
+CFLAGS	= -Wall -Wextra -Werror -O3 -march=native -funroll-loops
 
 LIBFT	= ./libft/libft.a
 LIBINC	= -I./libft

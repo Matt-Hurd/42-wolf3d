@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 16:42:11 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/18 09:52:56 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/11/08 14:37:55 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <stdlib.h>
 # include <math.h>
 # include <time.h>
-#include <stdio.h>
-#include <string.h>
+# include <stdio.h>
+# include <string.h>
 # define ABS(x) ((x > 0) ? x : x * -1)
 # define COLOR2 0x16A085
 # define COLOR1 0xF4D03F
@@ -47,46 +47,42 @@ typedef struct	s_vertex
 
 typedef struct	s_plot
 {
-	int	**points;
+	int		**points;
 	int		width;
 	int		height;
 }				t_plot;
 
-typedef struct s_bmp_info
+typedef struct	s_bmp_info
 {
-    unsigned long	width; 
-    unsigned long	height;
+	unsigned long	width;
+	unsigned long	height;
 }				t_bmp_info;
 
 typedef struct	s_wolf
 {
-	float			posX;
-	float			posY;
-	float			planeX;
-	float			planeY;
-	clock_t			time;
-	clock_t			oldTime;
-	double			rayPosX;
-	double			rayPosY;
-	double			rayDir;
-	double			rayDirX;
-	double			rayDirY;
-	double			dirX;
-	double			dirY;
-	double			sideDistX;
-	double			sideDistY;
-	double			deltaDistX;
-	double			deltaDistY;
-	double			perpWallDist;
-	double			moveSpeed;
-	double			rotSpeed;
-	int				stepX;
-	int				stepY;
+	float			posx;
+	float			posy;
+	double			rayposx;
+	double			rayposy;
+	double			raydir;
+	double			raydirx;
+	double			raydiry;
+	double			dirx;
+	double			diry;
+	double			sidedistx;
+	double			sidedisty;
+	double			deltadistx;
+	double			deltadisty;
+	double			perpwalldist;
+	double			movespeed;
+	double			rotspeed;
+	int				stepx;
+	int				stepy;
 	int				hit;
 	int				side;
-	int				mapY;
-	int				mapX;
-	int				lineHeight;
+	int				mapy;
+	int				mapx;
+	int				lineheight;
 	float			dir;
 	t_plot			*plot;
 	unsigned char	*textures;

@@ -16,22 +16,22 @@ static	void	key_hook_movement(int keycode, t_wolf *w)
 {
 	if (keycode == KEY_UP)
 	{
-		if (!w->plot->points[(int)(w->posX + cos(w->dir))][(int)w->posY])
-			w->posX += cos(w->dir) * w->moveSpeed;
-		if (!w->plot->points[(int)w->posX][(int)(w->posY + w->dirY)])
-			w->posY += w->dirY * w->moveSpeed;
+		if (!w->plot->points[(int)(w->posx + cos(w->dir))][(int)w->posy])
+			w->posx += cos(w->dir) * w->movespeed;
+		if (!w->plot->points[(int)w->posx][(int)(w->posy + w->diry)])
+			w->posy += w->diry * w->movespeed;
 	}
 	else if (keycode == KEY_DOWN)
 	{
-		if (!w->plot->points[(int)(w->posX - cos(w->dir))][(int)w->posY])
-			w->posX -= cos(w->dir) * w->moveSpeed;
-		if (!w->plot->points[(int)w->posX][(int)(w->posY - w->dirY)])
-			w->posY -= w->dirY * w->moveSpeed;
+		if (!w->plot->points[(int)(w->posx - cos(w->dir))][(int)w->posy])
+			w->posx -= cos(w->dir) * w->movespeed;
+		if (!w->plot->points[(int)w->posx][(int)(w->posy - w->diry)])
+			w->posy -= w->diry * w->movespeed;
 	}
 	else if (keycode == KEY_LEFT)
-		w->dir += w->rotSpeed;
+		w->dir += w->rotspeed;
 	else if (keycode == KEY_RIGHT)
-		w->dir -= w->rotSpeed;
+		w->dir -= w->rotspeed;
 }
 
 int				key_hook(int keycode, t_data *d)

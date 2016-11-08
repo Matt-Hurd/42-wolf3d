@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 19:26:41 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/18 12:19:29 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/11/08 14:28:59 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ t_plot		*parse_file(char *filename)
 	while ((result = ft_get_next_line(fd, &buff)) > 0)
 	{
 		if (plot->width == -1)
-			plot->width = ft_count_words(buff, 0, ' ');
-		if (plot->width != ft_count_words(buff, 0, ' '))
+			plot->width = ft_count_words(buff, ' ');
+		if (plot->width != ft_count_words(buff, ' '))
 			ft_error("Invalid Map");
 		ft_lst_add_back(&list, ft_lstnew(buff, ft_strlen(buff) + 1));
 		(plot->height)++;

@@ -6,19 +6,13 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 16:48:59 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/18 10:26:58 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/11/08 14:38:47 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libgfx.h"
 
-
-
-
-#include <stdio.h>
-
-
-static int		find_sheet(t_data *d, int z)
+static int				find_sheet(t_data *d, int z)
 {
 	int ret;
 
@@ -41,29 +35,28 @@ static int		find_sheet(t_data *d, int z)
 
 static unsigned char	*get_color(t_data *d, t_3d p, float height, int start)
 {
-	double	wallX;
-	int		texWidth;
+	double	wallx;
+	int		texwidth;
 	int		y;
-	int		texX;
+	int		texx;
 
-	texWidth = d->w->tex_info.width / 6;
+	texwidth = d->w->tex_info.width / 6;
 	if (d->w->side == 0)
-		wallX = d->w->rayPosY + d->w->perpWallDist * d->w->rayDirY;
+		wallx = d->w->rayposy + d->w->perpwalldist * d->w->raydiry;
 	else
-		wallX = d->w->rayPosX + d->w->perpWallDist * d->w->rayDirX;
-	wallX -= floor(wallX);
-
-	texX = (int)(wallX * (double)texWidth);
-	if (d->w->side == 0 && d->w->rayDirX > 0)
-		texX = texWidth - texX - 1;
-	if (d->w->side == 1 && d->w->rayDirY < 0)
-		texX = texWidth - texX - 1;
-
+		wallx = d->w->rayposx + d->w->perpwalldist * d->w->raydirx;
+	wallx -= floor(wallx);
+	texx = (int)(wallx * (double)texwidth);
+	if (d->w->side == 0 && d->w->raydirx > 0)
+		texx = texwidth - texx - 1;
+	if (d->w->side == 1 && d->w->raydiry < 0)
+		texx = texwidth - texx - 1;
 	y = d->w->tex_info.height - ((p.y - start) / height * 64);
-	return (d->w->textures + ((texX + y * d->w->tex_info.width) * 3) + find_sheet(d, p.z));
+	return (d->w->textures + ((texx + y * d->w->tex_info.width) * 3)
+		+ find_sheet(d, p.z));
 }
 
-static void			draw_point(t_data *d, t_3d p, float height, int start)
+static void				draw_point(t_data *d, t_3d p, float height, int start)
 {
 	int				i;
 	unsigned char	*color;
@@ -81,7 +74,7 @@ static void			draw_point(t_data *d, t_3d p, float height, int start)
 			(float)WINDOW_SIZE_Y * 1.3));
 		d->pixel_img[i] = (p.z == 255) ? 0x30 * darken : 0;
 		d->pixel_img[++i] = (p.z == 255) ? 0x30 * darken : 0;
-		d->pixel_img[++i] = (p.z == 255) ? 0x30 * darken: 0;
+		d->pixel_img[++i] = (p.z == 255) ? 0x30 * darken : 0;
 		return ;
 	}
 	if (p.x > 0 && p.y > 0 && p.x < WINDOW_SIZE_X && p.y < WINDOW_SIZE_Y)
@@ -92,10 +85,10 @@ static void			draw_point(t_data *d, t_3d p, float height, int start)
 	}
 }
 
-void				ft_3d_draw_vert(t_data *d, int x, int y, int height)
+void					ft_3d_draw_vert(t_data *d, int x, int y, int height)
 {
-	int i;
-	t_3d point;
+	int		i;
+	t_3d	point;
 
 	i = -1;
 	point.x = x;
@@ -105,7 +98,7 @@ void				ft_3d_draw_vert(t_data *d, int x, int y, int height)
 		if (i < y)
 			point.z = 256;
 		else if (i < y + height)
-			point.z = d->w->plot->points[d->w->mapX][d->w->mapY];
+			point.z = d->w->plot->points[d->w->mapx][d->w->mapy];
 		else
 			point.z = 255;
 		draw_point(d, point, height, y);

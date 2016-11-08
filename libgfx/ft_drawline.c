@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 16:48:59 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/29 10:32:17 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/11/08 14:42:37 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static unsigned char	*get_color(t_data *d, t_3d p, float height, int start)
 	if (d->w->side == 1 && d->w->raydiry < 0)
 		texx = texwidth - texx - 1;
 	y = d->w->tex_info.height - ((p.y - start) / height * 64);
-	return (d->w->textures + ((texx + y * d->w->tex_info.width) * 3) +
-		find_sheet(d, p.z));
+	return (d->w->textures + ((texx + y * d->w->tex_info.width) * 3)
+		+ find_sheet(d, p.z));
 }
 
 static void				draw_point(t_data *d, t_3d p, float height, int start)

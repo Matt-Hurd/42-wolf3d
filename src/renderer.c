@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/09 04:47:42 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/29 10:39:44 by mhurd            ###   ########.fr       */
+/*   Created: 2016/11/08 14:44:10 by mhurd             #+#    #+#             */
+/*   Updated: 2016/11/08 14:44:15 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	draw_map(t_data *d, t_wolf *w)
 		lineheight = (int)(WINDOW_SIZE_Y / w->perpwalldist);
 		drawstart = -lineheight / 2 + WINDOW_SIZE_Y / 2;
 		ft_3d_draw_vert(d, x, drawstart, lineheight);
-		w->oldtime = w->time;
-		w->time = clock();
 		w->movespeed = .25;
 		w->rotspeed = .15;
 	}

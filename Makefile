@@ -1,138 +1,85 @@
-NAME =	libft.a
-FLAGS =	-Wall -Wextra -Werror -O3
-CC = 	gcc
-ODIR =	bin/
-IDIR = 
-SRC =
-OBJ =	$(SRC:.c=.o)
-EXT =	$(IDIR)$(NAME:.a=.h)
-
-EXT +=	Makefile
 # **************************************************************************** #
-# char                                                                         #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/09/28 19:34:56 by mhurd             #+#    #+#              #
+#    Updated: 2016/11/08 14:43:54 by mhurd            ###   ########.fr        #
+#                                                                              #
 # **************************************************************************** #
-SRC +=	ft_islower.c
-SRC +=	ft_isupper.c
-SRC +=	ft_isalpha.c
-SRC +=	ft_isdigit.c
-SRC +=	ft_isalnum.c
-SRC +=	ft_isascii.c
-SRC +=	ft_isprint.c
-SRC +=	ft_toupper.c
-SRC +=	ft_tolower.c
-SRC +=	ft_isspace.c
 
-# **************************************************************************** #
-# mem                                                                          #
-# **************************************************************************** #
-SRC +=	ft_memset.c
-SRC +=	ft_bzero.c
-SRC +=	ft_memcpy.c
-SRC +=	ft_memccpy.c
-SRC +=	ft_memmove.c
-SRC +=	ft_memchr.c
-SRC +=	ft_memcmp.c
+NAME	= wolf3d
 
-SRC +=	ft_memalloc.c
-SRC +=	ft_memdel.c
-SRC +=	ft_realloc.c
-# **************************************************************************** #
-# put                                                                          #
-# **************************************************************************** #
-SRC +=	ft_putchar.c
-SRC +=	ft_putchar_fd.c
-SRC +=	ft_putendl.c
-SRC +=	ft_putendl_fd.c
-SRC +=	ft_putnbr.c
-SRC +=	ft_putnbr_fd.c
-SRC +=	ft_putstr.c
-SRC +=	ft_putstr_fd.c
-SRC +=	ft_print_memory.c
-# **************************************************************************** #
-# str                                                                          #
-# **************************************************************************** #
-SRC +=	ft_strlen.c
-SRC +=	ft_strdup.c
-SRC +=	ft_strcpy.c
-SRC +=	ft_strncpy.c
-SRC +=	ft_strcat.c
-SRC +=	ft_strncat.c
-SRC +=	ft_strlcat.c
-SRC +=	ft_strchr.c
-SRC +=	ft_strrchr.c
-SRC +=	ft_strstr.c
-SRC +=	ft_strnstr.c
-SRC +=	ft_strcmp.c
-SRC +=	ft_strncmp.c
-SRC +=	ft_strrev.c
+SRC		= main.c \
+		  parser.c \
+		  renderer.c \
+		  hooks.c \
+		  error.c \
+		  engine.c
 
-SRC +=	ft_strnew.c
-SRC +=	ft_strdel.c
-SRC +=	ft_strclr.c
-SRC +=	ft_striter.c
-SRC +=	ft_striteri.c
-SRC +=	ft_strmap.c
-SRC +=	ft_strmapi.c
-SRC +=	ft_strequ.c
-SRC +=	ft_strnequ.c
-SRC +=	ft_strsub.c
-SRC +=	ft_strjoin.c
-SRC +=	ft_strtrim.c
-SRC +=	ft_strsplit.c
+OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 
-SRC +=	ft_strcjoin.c
-SRC +=	ft_printjoin.c
-SRC	+=	ft_count_words.c
-# **************************************************************************** #
-# integer                                                                      #
-# **************************************************************************** #
-SRC +=	ft_atoi.c
-SRC +=	ft_itoa.c
-# **************************************************************************** #
-# list                                                                         #
-# **************************************************************************** #
-SRC +=	ft_lstnew.c
-SRC +=	ft_lstdelone.c
-SRC +=	ft_lstdel.c
-SRC +=	ft_lstadd.c
-SRC +=	ft_lstiter.c
-SRC +=	ft_lstmap.c
-SRC +=	ft_lstmap.c
-SRC	+=	ft_lstdelcont.c
-SRC	+=	ft_lst_add_back.c
+CC		= gcc
+CFLAGS	= -Wall -Wextra -Werror -O3 -march=native -funroll-loops
 
-SRC +=	ft_gnl.c
+LIBFT	= ./libft/libft.a
+LIBINC	= -I./libft
+LIBLINK	= -L./libft -lft
 
-O =		$(addprefix $(ODIR), $(OBJ))
+MLX		= ./minilibx/libmlx.a
+MLXINC	= -I./minilibx
+MLXLINK	= -L./minilibx -lmlx -framework OpenGL -framework AppKit
 
-all: $(NAME)
+LIBGFX		= ./libgfx/libgfx.a
+LIBGFXINC	= -I./libgfx
+LIBGFXLINK	= -L./libgfx -lgfx
 
-love: all
+SRCDIR	= ./src/
+INCDIR	= ./includes/
+OBJDIR	= ./obj/
 
-norm:
-	norminette $(S)
+all: obj libft mlx libgfx $(NAME)
 
-$(NAME): $(O) $(EXT)
-	@ar rc $(NAME) $(O)
-	@ranlib $(NAME)
+gfx:
+	make -C ./libgfx fclean
+	rm -rf $(NAME)
+	make
 
-$(ODIR)%.o: %.c $(EXT)
-	@echo "-> Compiling $<..."
-	@$(CC) $(FLAGS) -c $< -o $@
+obj:
+	mkdir -p $(OBJDIR)
 
-$(O): | ./bin
+$(OBJDIR)%.o:$(SRCDIR)%.c
+	$(CC) $(CFLAGS) $(LIBINC) $(MLXINC) $(LIBGFXINC) -I $(INCDIR) -o $@ -c $<
 
-./bin:
-	@mkdir $(ODIR)
+libft: $(LIBFT)
+
+mlx: $(MLX)
+
+libgfx: $(LIBGFX)
+
+$(LIBFT):
+	make -C ./libft
+
+$(MLX):
+	make -C ./minilibx
+
+$(LIBGFX):
+	make -C ./libgfx
+
+$(NAME): $(OBJ)
+	$(CC) -o $(NAME) $(OBJ) $(MLXLINK) $(LIBGFXLINK) $(LIBLINK)
 
 clean:
-	@echo "-> Cleaning libft object files..."
-	@rm -f bin/*.o
+	rm -rf $(OBJDIR)
+	make -C ./libft clean
+	make -C ./minilibx clean
+	make -C ./libgfx clean
 
 fclean: clean
-	@echo "-> Cleaning $(NAME)..."
-	@rm -f $(NAME) 
+	rm -rf $(NAME)
+	make -C ./libft fclean
+	make -C ./libgfx fclean
 
 re: fclean all
-
-.PHONY: all clean fclean re norm

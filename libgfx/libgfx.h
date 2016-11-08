@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/08 16:42:11 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/29 10:40:05 by mhurd            ###   ########.fr       */
+/*   Created: 2016/11/08 14:43:07 by mhurd             #+#    #+#             */
+/*   Updated: 2016/11/08 14:43:13 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <time.h>
+# include <stdio.h>
 # include <string.h>
 # define ABS(x) ((x > 0) ? x : x * -1)
 # define WINDOW_SIZE_X 1600
@@ -59,8 +60,6 @@ typedef struct	s_wolf
 {
 	float			posx;
 	float			posy;
-	clock_t			time;
-	clock_t			oldtime;
 	double			rayposx;
 	double			rayposy;
 	double			raydir;

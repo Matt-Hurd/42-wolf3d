@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 14:44:10 by mhurd             #+#    #+#             */
-/*   Updated: 2016/11/08 14:44:15 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/11/16 19:09:19 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ void	draw_map(t_data *d, t_wolf *w)
 		lineheight = (int)(WINDOW_SIZE_Y / w->perpwalldist);
 		drawstart = -lineheight / 2 + WINDOW_SIZE_Y / 2;
 		ft_3d_draw_vert(d, x, drawstart, lineheight);
-		w->movespeed = .25;
-		w->rotspeed = .15;
 	}
+	w->oldtime = w->currenttime;
+	w->currenttime = clock();
+	w->movespeed = (w->currenttime - w->oldtime) / 20000 * .15;
+	w->rotspeed = (w->currenttime - w->oldtime) / 20000 * .05;
 }
 
 void	draw_reload(t_data *d, t_wolf *w)
@@ -68,7 +70,9 @@ void	draw_everything(t_data *d, t_wolf *w)
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, WINDOW_SIZE_X, WINDOW_SIZE_Y, "Wolf3D");
 	mlx_expose_hook(d->win, expose_hook, d);
-	mlx_hook(d->win, 2, 3, key_hook, d);
+	mlx_hook(d->win, 2, 0, key_pressed, d);
+	mlx_hook(d->win, 3, 0, key_released, w);
 	mlx_hook(d->win, 17, 0, ft_red, d);
+	mlx_loop_hook(d->mlx, main_hook, d);
 	mlx_loop(d->mlx);
 }

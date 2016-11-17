@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 14:43:07 by mhurd             #+#    #+#             */
-/*   Updated: 2016/11/08 14:43:13 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/11/16 18:39:52 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ typedef struct	s_bmp_info
 
 typedef struct	s_wolf
 {
+	char			direction;
+	double			currenttime;
+	double			oldtime;
 	float			posx;
 	float			posy;
 	double			rayposx;

@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 16:06:16 by mhurd             #+#    #+#             */
-/*   Updated: 2016/10/18 12:20:36 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/11/16 18:35:51 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,7 @@ void		ft_error(char *s);
 void		setup_dda(t_wolf *w);
 void		do_dda(t_wolf *w);
 void		load_textures(t_data *d);
+int			main_hook(t_data *d);
+int			key_released(int keycode, t_wolf *w);
+int			key_pressed(int keycode, t_data *d);
 #endif

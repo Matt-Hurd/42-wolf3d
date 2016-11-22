@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 01:12:45 by mhurd             #+#    #+#             */
-/*   Updated: 2016/11/16 19:12:43 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/11/19 04:44:09 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,21 @@ int		main_hook(t_data *d)
 	w = d->w;
 	if (w->direction & 1)
 	{
-		if (!w->plot->points[(int)(w->posx + cos(w->dir))][(int)w->posy])
+		if (!w->plot->points[(int)(w->posx + cos(w->dir) * w->movespeed)][(int)w->posy])
 			w->posx += cos(w->dir) * w->movespeed;
-		if (!w->plot->points[(int)w->posx][(int)(w->posy + w->diry)])
+		if (!w->plot->points[(int)w->posx][(int)(w->posy + w->diry * w->movespeed)])
 			w->posy += w->diry * w->movespeed;
 	}
-	else if (w->direction & 2)
+	if (w->direction & 2)
 	{
-		if (!w->plot->points[(int)(w->posx - cos(w->dir))][(int)w->posy])
+		if (!w->plot->points[(int)(w->posx - cos(w->dir) * w->movespeed)][(int)w->posy])
 			w->posx -= cos(w->dir) * w->movespeed;
-		if (!w->plot->points[(int)w->posx][(int)(w->posy - w->diry)])
+		if (!w->plot->points[(int)w->posx][(int)(w->posy - w->diry * w->movespeed)])
 			w->posy -= w->diry * w->movespeed;
 	}
-	else if (w->direction & 4)
+	if (w->direction & 4)
 		w->dir += w->rotspeed;
-	else if (w->direction & 8)
+	if (w->direction & 8)
 		w->dir -= w->rotspeed;
 	draw_reload(d, d->w);
 	return (0);

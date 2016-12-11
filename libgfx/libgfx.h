@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 14:43:07 by mhurd             #+#    #+#             */
-/*   Updated: 2016/11/16 18:39:52 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/11 06:27:17 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct	s_wolf
 	double			deltadistx;
 	double			deltadisty;
 	double			perpwalldist;
-	double			movespeed;
+	double			ms;
 	double			rotspeed;
 	int				stepx;
 	int				stepy;
@@ -88,6 +88,8 @@ typedef struct	s_wolf
 	t_plot			*plot;
 	unsigned char	*textures;
 	t_bmp_info		tex_info;
+	float			sprint;
+	char			crouch;
 }				t_wolf;
 
 typedef struct	s_data
@@ -99,7 +101,6 @@ typedef struct	s_data
 	int		bpp;
 	int		s_line;
 	int		ed;
-	t_plot	*plot;
 	float	zr;
 	float	scale;
 	t_wolf	*w;
@@ -118,4 +119,5 @@ void			ft_3d_draw_vert(t_data *d, int x, int y, int height);
 t_3d			*ft_make_3d(int x, int y, int z);
 t_vertex		*ft_make_vertex(int x, int y, int z);
 unsigned char	*read_bmp(char *filename, t_bmp_info *info);
+void			free_all(t_data *d);
 #endif

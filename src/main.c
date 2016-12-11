@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 15:35:03 by mhurd             #+#    #+#             */
-/*   Updated: 2016/11/15 15:20:10 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/11 07:40:15 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,16 @@ void	display_controls(void)
 {
 	ft_putendl("CONTROLS:\n\
 Movement:\n\
-	Arrow Keys");
+	Arrow Keys\n\
+Crouch:\n\
+	X\n\
+Sprint:\n\
+	Z");
+}
+
+void	load_textures(t_data *d)
+{
+	d->w->textures = read_bmp("textures/sheet.bmp", &d->w->tex_info);
 }
 
 int		main(int ac, char **av)

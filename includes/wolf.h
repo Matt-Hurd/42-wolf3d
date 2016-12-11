@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 16:06:16 by mhurd             #+#    #+#             */
-/*   Updated: 2016/11/16 18:35:51 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/11 06:24:36 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,8 @@
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 
-# define KEY_ZOOM_IN 69
-# define KEY_ZOOM_OUT 78
-
-# define KEY_ROT_X_U 86
-# define KEY_ROT_X_D 83
-# define KEY_ROT_Y_U 87
-# define KEY_ROT_Y_D 84
-# define KEY_ROT_Z_U 88
-# define KEY_ROT_Z_D 85
+# define KEY_Z	6
+# define KEY_X	7
 
 t_plot		*parse_file(char *filename);
 void		draw_everything(t_data *d, t_wolf *f);

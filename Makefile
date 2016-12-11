@@ -6,7 +6,7 @@
 #    By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/28 19:34:56 by mhurd             #+#    #+#              #
-#    Updated: 2016/11/08 14:43:54 by mhurd            ###   ########.fr        #
+#    Updated: 2016/12/11 03:50:04 by mhurd            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,10 @@ SRCDIR	= ./src/
 INCDIR	= ./includes/
 OBJDIR	= ./obj/
 
+ifdef ALLOCWRAP
+	LDFLAGS += $(HOME)/lib/alloc_wrap.c -ldl
+endif
+
 all: obj libft mlx libgfx $(NAME)
 
 gfx:
@@ -69,7 +73,7 @@ $(LIBGFX):
 	make -C ./libgfx
 
 $(NAME): $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(MLXLINK) $(LIBGFXLINK) $(LIBLINK)
+	$(CC) $(LDFLAGS) -o $(NAME) $(OBJ) $(MLXLINK) $(LIBGFXLINK) $(LIBLINK)
 
 clean:
 	rm -rf $(OBJDIR)

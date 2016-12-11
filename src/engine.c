@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 14:44:01 by mhurd             #+#    #+#             */
-/*   Updated: 2016/11/08 14:44:03 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/11 05:43:47 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,13 @@ void	do_dda(t_wolf *w)
 			w->sidedisty += w->deltadisty;
 			w->mapy += w->stepy;
 		}
-		if (w->plot->points[w->mapx][w->mapy] > 0)
+		if (w->mapy >= 0 && w->mapy < w->plot->width - 1
+			&& w->mapx >= 0 && w->mapx < w->plot->height)
+		{
+			if (w->plot->points[w->mapx][w->mapy] > 0)
+				w->hit = 1;
+		}
+		else
 			w->hit = 1;
 	}
 }

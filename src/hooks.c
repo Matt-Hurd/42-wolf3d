@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 01:12:45 by mhurd             #+#    #+#             */
-/*   Updated: 2016/11/19 04:44:09 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/11 06:30:28 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,17 @@ int		key_pressed(int keycode, t_data *d)
 		d->w->direction |= 4;
 	if (keycode == KEY_RIGHT)
 		d->w->direction |= 8;
+	if (keycode == KEY_Z)
+		d->w->sprint = 2;
+	else if (keycode == KEY_X)
+	{
+		d->w->sprint = 0.5;
+		d->w->crouch = 1;
+	}
 	if (keycode == KEY_ESC)
 	{
 		mlx_destroy_window(d->mlx, d->win);
+		free_all(d);
 		exit(0);
 	}
 	return (0);
@@ -40,6 +48,13 @@ int		key_released(int keycode, t_wolf *w)
 		w->direction -= 4;
 	if (keycode == KEY_RIGHT && w->direction & 8)
 		w->direction -= 8;
+	if (keycode == KEY_Z)
+		w->sprint = 1;
+	if (keycode == KEY_X)
+	{
+		w->sprint = 1;
+		w->crouch = 0;
+	}
 	return (0);
 }
 
@@ -50,17 +65,19 @@ int		main_hook(t_data *d)
 	w = d->w;
 	if (w->direction & 1)
 	{
-		if (!w->plot->points[(int)(w->posx + cos(w->dir) * w->movespeed)][(int)w->posy])
-			w->posx += cos(w->dir) * w->movespeed;
-		if (!w->plot->points[(int)w->posx][(int)(w->posy + w->diry * w->movespeed)])
-			w->posy += w->diry * w->movespeed;
+		if (!w->plot->points[(int)(w->posx + cos(w->dir)
+			* w->ms)][(int)w->posy])
+			w->posx += cos(w->dir) * w->ms;
+		if (!w->plot->points[(int)w->posx][(int)(w->posy + w->diry * w->ms)])
+			w->posy += w->diry * w->ms;
 	}
 	if (w->direction & 2)
 	{
-		if (!w->plot->points[(int)(w->posx - cos(w->dir) * w->movespeed)][(int)w->posy])
-			w->posx -= cos(w->dir) * w->movespeed;
-		if (!w->plot->points[(int)w->posx][(int)(w->posy - w->diry * w->movespeed)])
-			w->posy -= w->diry * w->movespeed;
+		if (!w->plot->points[(int)(w->posx - cos(w->dir)
+			* w->ms)][(int)w->posy])
+			w->posx -= cos(w->dir) * w->ms;
+		if (!w->plot->points[(int)w->posx][(int)(w->posy - w->diry * w->ms)])
+			w->posy -= w->diry * w->ms;
 	}
 	if (w->direction & 4)
 		w->dir += w->rotspeed;

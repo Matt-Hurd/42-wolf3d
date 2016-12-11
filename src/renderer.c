@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 14:44:10 by mhurd             #+#    #+#             */
-/*   Updated: 2016/11/16 19:09:19 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/11 06:28:22 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ void	draw_map(t_data *d, t_wolf *w)
 			w->perpwalldist = (w->mapy - w->rayposy +
 				(1 - w->stepy) / 2) / w->raydiry;
 		lineheight = (int)(WINDOW_SIZE_Y / w->perpwalldist);
-		drawstart = -lineheight / 2 + WINDOW_SIZE_Y / 2;
+		drawstart = -lineheight / 2 + WINDOW_SIZE_Y / 2
+			- (WINDOW_SIZE_Y * 0.1 * w->crouch);
 		ft_3d_draw_vert(d, x, drawstart, lineheight);
 	}
 	w->oldtime = w->currenttime;
 	w->currenttime = clock();
-	w->movespeed = (w->currenttime - w->oldtime) / 20000 * .15;
-	w->rotspeed = (w->currenttime - w->oldtime) / 20000 * .05;
+	w->ms = (w->currenttime - w->oldtime) / 20000 * .04 * d->w->sprint;
+	w->rotspeed = (w->currenttime - w->oldtime) / 20000 * .025;
 }
 
 void	draw_reload(t_data *d, t_wolf *w)
@@ -63,8 +64,9 @@ int		ft_red(t_data *d)
 
 void	draw_everything(t_data *d, t_wolf *w)
 {
-	w->posx = 22;
-	w->posy = 12;
+	w->posx = 5.5;
+	w->posy = 5.5;
+	w->sprint = 1;
 	w->dir = M_PI;
 	load_textures(d);
 	d->mlx = mlx_init();

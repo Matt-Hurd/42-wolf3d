@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 04:21:33 by mhurd             #+#    #+#             */
-/*   Updated: 2016/12/28 05:10:46 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/28 05:29:33 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_exit(void)
 {
-	system("killall afplay");
+	system("killall afplay 2> /dev/null");
 	exit(1);
 }
 

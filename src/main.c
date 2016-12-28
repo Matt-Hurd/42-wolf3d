@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 15:35:03 by mhurd             #+#    #+#             */
-/*   Updated: 2016/12/28 05:11:50 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/28 05:32:20 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ Movement:\n\
 Crouch:\n\
 	X\n\
 Sprint:\n\
-	Z");
+	Z\n\
+Jump:\n\
+	Spacebar");
 }
 
 void	load_textures(t_data *d)

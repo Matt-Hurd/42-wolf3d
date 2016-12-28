@@ -6,11 +6,19 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 01:12:45 by mhurd             #+#    #+#             */
-/*   Updated: 2016/12/11 06:30:28 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/28 05:14:22 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+
+void	do_jump(t_data *d)
+{
+	if (d->w->height > 1)
+		return ;
+	d->w->jumpspeed = 1;
+	system("afplay sounds/jump2.mp3 &");
+}
 
 int		key_pressed(int keycode, t_data *d)
 {
@@ -24,6 +32,8 @@ int		key_pressed(int keycode, t_data *d)
 		d->w->direction |= 8;
 	if (keycode == KEY_Z)
 		d->w->sprint = 2;
+	if (keycode == KEY_SPACE)
+		do_jump(d);
 	else if (keycode == KEY_X)
 	{
 		d->w->sprint = 0.5;

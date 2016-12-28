@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 14:44:10 by mhurd             #+#    #+#             */
-/*   Updated: 2016/12/11 06:28:22 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/28 05:23:35 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	draw_map(t_data *d, t_wolf *w)
 			w->perpwalldist = (w->mapy - w->rayposy +
 				(1 - w->stepy) / 2) / w->raydiry;
 		lineheight = (int)(WINDOW_SIZE_Y / w->perpwalldist);
-		drawstart = -lineheight / 2 + WINDOW_SIZE_Y / 2
-			- (WINDOW_SIZE_Y * 0.1 * w->crouch);
+		drawstart = -lineheight / 2 + WINDOW_SIZE_Y / 2 - (WINDOW_SIZE_Y *
+			0.1 * w->crouch) + w->height * 30 / w->perpwalldist;
 		ft_3d_draw_vert(d, x, drawstart, lineheight);
 	}
 	w->oldtime = w->currenttime;
@@ -45,6 +45,11 @@ void	draw_reload(t_data *d, t_wolf *w)
 {
 	d->img = mlx_new_image(d->mlx, WINDOW_SIZE_X + 100, WINDOW_SIZE_Y + 100);
 	d->pixel_img = mlx_get_data_addr(d->img, &(d->bpp), &(d->s_line), &(d->ed));
+	if (w->jumpspeed > -1)
+	{
+		w->jumpspeed -= 0.05;
+		w->height = MAX(1, w->height + w->jumpspeed);
+	}
 	draw_map(d, w);
 	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
 	mlx_destroy_image(d->mlx, d->img);

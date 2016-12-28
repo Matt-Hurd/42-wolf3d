@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 14:43:07 by mhurd             #+#    #+#             */
-/*   Updated: 2016/12/11 06:27:17 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/28 05:16:22 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef struct	s_wolf
 	t_bmp_info		tex_info;
 	float			sprint;
 	char			crouch;
+	float			height;
+	float			jumpspeed;
 }				t_wolf;
 
 typedef struct	s_data

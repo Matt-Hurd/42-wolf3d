@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/08 15:35:03 by mhurd             #+#    #+#             */
-/*   Updated: 2016/12/11 07:40:15 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/12/28 04:57:57 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ Sprint:\n\
 void	load_textures(t_data *d)
 {
 	d->w->textures = read_bmp("textures/sheet.bmp", &d->w->tex_info);
+	if (!d->w->textures ||
+		d->w->tex_info.width * d->w->tex_info.height != 466944)
+		ft_error("Bad Texture");
 }
 
 int		main(int ac, char **av)
